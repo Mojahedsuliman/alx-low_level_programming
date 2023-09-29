@@ -1,13 +1,20 @@
 #include "main.h"
+
 /**
- * print_new_recursion - print a string
+ * _print_rev_recursion - print a string
  * @s: string that will print
+ *
+ * Return: Null
  */
 void _print_rev_recursion(char *s)
 {
-	if (*s)
+	if (*s == '\0')
 	{
-		_print_rev_recursion(s + 1);
-		_putchar(*s);
+		return;
 	}
+
+	s++;
+	_print_rev_recursion(s);
+	s--;
+	_putchar(*s);
 }
