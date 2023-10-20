@@ -8,14 +8,14 @@
 
 int _strlen(char *s)
 {
-	int p = 0;
+	int i = 0;
 
 	if (!s)
 
 		return (0);
 	while (*s++)
-		p++;
-	return (p);
+		i++;
+	return (i);
 }
 /**
  * print_list - linking lists prints
@@ -26,14 +26,14 @@ int _strlen(char *s)
 size_t print_list(const list_t *h);
 
 {
-	size_t p = 0;
+	size_t i = 0;
 
 	while (h)
 
 	{
 		printf("[%d] %s\n", _strlen(h->str), h->str ? h->str : "(nill");
 		h = h->next;
-		p++;
+		i++;
 	}
-	return (p);
+	return (i);
 }
