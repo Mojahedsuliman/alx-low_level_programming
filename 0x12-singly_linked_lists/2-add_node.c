@@ -3,32 +3,29 @@
 #include <string.h>
 
 /**
- * add_node - adds a node to begin of the list
- * @head: pointer address
- * @str: filed of nodes
+ * add_node - adding a new node to the linked list begin
+ * @head: double type pointer to the list_t
+ * @str: a new string adding to nodes
  *
- * Return: lists size
+ * Return: the address of the new element, or NULL if it failed
  */
-list_t *add_node(list_t **head, const char *str);
+list_t *add_node(list_t **head, const char *str)
 {
+	list_t *fresh;
+	unsigned int len = 0;
 
-	list_t *the_new = malloc(sizeof(list_t));
+	len++;
+		while (str[len])
 
-	if (!head || !the_new)
-	return (NULL);
-	if (str)
-
-	{
-		the_new->str = strdup(str);
-		if (the_new->str)
-		{
-			free(the_new);
+			fresh = malloc(sizeof(list_t));
+	if
+		(!fresh)
 			return (NULL);
-		}
-		the_new->len = _strlen(the_new->str);
-	}
 
-	the_new->next = *head;
-	*head = the_new;
-	return (the_new);
+	fresh->str = strdup(str);
+	fresh->len = len;
+	fresh->next = (*head);
+	(*head) = fresh;
+
+	return (*head);
 }
