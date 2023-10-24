@@ -3,6 +3,7 @@
 /**
  * add_nodeint - function that adds a new node at the beginning of a listint_t
  * @head: the pointer to the first node of the list
+ * @n: integer to add to the list
  *
  * Return: the address of the new element, or NULL if it failed
  */
