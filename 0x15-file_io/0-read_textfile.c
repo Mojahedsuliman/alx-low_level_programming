@@ -1,4 +1,11 @@
 #include "main.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+
 
 /**
  * read_textfile -  reads a text file and prints it to the POSIX standard out
