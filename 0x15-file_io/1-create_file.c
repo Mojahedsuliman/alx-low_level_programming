@@ -20,14 +20,14 @@ int create_file(const char *filename, char *text_content)
 		return (-1);
 
 		if (text_content)
-		{
-			for (n = 0; text_content[n]; n++)
-				;
+			text_content = NULL;
 
-			w = write(fd, text_content, n);
-			if (w != n)
-				return (-1);
-		}
+		w = write(fd, text_content, n);
+
+		if (w == -1)
+			return (-1);
+
 		close(fd);
+		
 		return (1);
 }
