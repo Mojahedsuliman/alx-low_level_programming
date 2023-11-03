@@ -21,11 +21,11 @@ int create_file(const char *filename, char *text_content)
 
 		if (text_content)
 		{
-			for (w = 0; text_content[w]; w++)
+			for (n = 0; text_content[n]; n++)
 				;
 
-			n = write(fd, text_content, w);
-			if (n != w)
+			w = write(fd, text_content, n);
+			if (w != n)
 				return (-1);
 		}
 		close(fd);
