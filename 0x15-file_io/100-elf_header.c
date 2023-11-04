@@ -1,64 +1,91 @@
-#include "main.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <elf.h>
 
+void check_elf(unsigned char *e_ident);
+void print_magic(unsigned char *e_ident);
+void print_class(unsigned char *e_ident);
+void print_data(unsigned char *e_ident);
+void print_version(unsigned char *e_ident);
+void print_abi(unsigned char *e_ident);
+void print_osabi(unsigned char *e_ident);
+void print_type(unsigned int e_type, unsigned char *e_ident);
+void print_entry(unsigned long int e_entry, unsigned char *e_ident);
+void close_elf(int elf);
+
 /**
- * print_magic - prints the magic numbers
- * @h: header
- */
-void print_magic(Elf64_Ehdr h)
+ * check_elf - check if a file is an ELF file.
+ * @e_ident: a pointer to an array containing the ELF magic numbers
+ *
+ * Description: If the file is not an ELF file - exit code 98.
+*/
+void check_elf(unsigned char *e_ident)
 {
 		int i;
 
-		printf("  Magic:   ");
+		for (i = 0; i < 4; i++)
+		{
+				if (e_ident[i] != 127 &&
+				e_ident[i] != 'E' &&
+				e_ident[i] != 'L' &&
+				e_ident[i] != 'F' &&
+				{
+				dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+				exit(98);
+			}
+		}
+}
+
+/**
+ * print_magic - prints the magic numbers of an ELF header.
+ * @e_ident: a pointer to an array containing the ELF magic numbers
+ *
+ * Description: Magic numbers are seprated by spaces.
+*/
+void print_magic(unsigned char *e_ident)
+{
+		int i;
+
+		printf("  Magic: ");
+
 		for (i = 0; i < EI_NIDENT; i++)
 		{
-		printf(" %02x", h.e_ident[i]);
-		}
-		printf("\n");
+				printf("%02x ", e_ident[i]);
 
-		print_mod(h);
+				if (i == EI_NIEDENT - 1)
+				printf("\n");
+				else
+				printf(" ");
+		}
 }
 
 /**
- * print_mod - prints the type of the file
- * @h: header
+ * print_class - prints the class of an ELF header.
+ * @e_ident: a pointer to an array containing the ELF class
 */
-void print_mod(Elf64_Ehdr h)
+void print_class(unsigned char *e_ident)
 {
-		printf("  Class:
-		");
-		if (h.e_ident[EI_Class] == ELFCLASS64)
+		printf("  Class: ");
+
+		switch (e_ident[EI_CLASS])
 		{
-			printf("ELF64\n");
-		}
-		else
-		{
+				case ELFCLASSNONE:
+				printf("none\n");
+				break;
+
+				case ELFCLASS32:
 				printf("ELF32\n");
-		}
-}
+				break;
 
-/**
- *print_class - prints the class of the file
- *@h: header
- */
-void print_class(Elf64_Ehdr h)
-{
-		printf("  Data:    ");
-		if (h.e_ident[EI_Data] == ELFDATA2LSB)
-		{
-			printf("2's complement, little endian\n");
-		}
-		else
-		{
-				printf("2's complement, big endian\n");
-		}
-}
+				case ELFCLASS64:
+				printf("ELF64\n");
+				break;
 
-/**
- * print_version - prints the version of the file
- *@h: header
-*/
-void print_version(Elf64_Ehdr h)
-{
-			printf("  Version: %d\n", h.e_ident[EI_Version]);
+				default:
+				printf("<unkown: %x>\n", e_ident[EI_CLASS]);
+}
 }
