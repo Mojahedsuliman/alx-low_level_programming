@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-/**
+/*
  * struct dlistint_s - doubly linked list
  * @n: integer
  * @prev: points to the previous node
