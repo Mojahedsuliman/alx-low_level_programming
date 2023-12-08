@@ -6,7 +6,7 @@
  *
  * Return: the sum of all the data (n).
 */
-int sum_dlistint(dlistint_t *head);
+int sum_dlistint(dlistint_t *head)
 {
 	int sum = 0;
 
