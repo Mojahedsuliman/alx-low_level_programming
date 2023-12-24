@@ -25,15 +25,3 @@ shash_table_t *shash_table_create(unsigned long int size)
 	ht->stail = NULL;
 	return (ht);
 }
-/**
- * shash_table_set - sets the key value
- * @ht: shash table
- * @key: key data
- * @value: data to add
- *
- * Return: 1 on succeeded, 0 otherwise
- */
-int shash_table_set(shash_table_t *ht, const char *key, const char *value)
-{
-	return (1);
-}
